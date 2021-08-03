@@ -24,41 +24,43 @@ export default function Filters() {
   }
 
   return (
-    <div className="flex flex-col">
-      <h3 className="text-xl font-bold">Filter</h3>
-
-      <h5 className="text-md font-bold pb-2 pt-4">Type</h5>
-      <fieldset className="space-y-2">
-        {jobTypes.map(({ key, value }) => (
-          <div className="relative flex items-start">
-            <div className="flex items-center h-5">
-              <input
-                id={key}
-                aria-describedby={value}
-                name={value}
-                type="checkbox"
-                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded cursor-pointer"
-              />
+    <div className="flex flex-col bg-white shadow overflow-hidden sm:rounded-md divide-y divide-gray-200">
+      <div className="p-4">
+        <h5 className="text-md font-bold pb-2">Type</h5>
+        <fieldset className="space-y-2">
+          {jobTypes.map(({ key, value }) => (
+            <div key={key} className="relative flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id={key}
+                  aria-describedby={value}
+                  name={value}
+                  type="checkbox"
+                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded cursor-pointer"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor={key} className="font-medium text-gray-700 cursor-pointer">
+                  {value}
+                </label>
+              </div>
             </div>
-            <div className="ml-3 text-sm">
-              <label htmlFor={key} className="font-medium text-gray-700 cursor-pointer">
-                {value}
-              </label>
-            </div>
-          </div>
-        ))}
-      </fieldset>
-
-      <h5 className="text-md font-bold pb-2 pt-4">Countries</h5>
-      <fieldset>
-        <select name="countries" multiple className="border rounded ">
-          {countries.map((country) => (
-            <option key={country.id} value={country.id}>
-              {country.name}
-            </option>
           ))}
-        </select>
-      </fieldset>
+        </fieldset>
+      </div>
+
+      <div className="p-4">
+        <h5 className="text-md font-bold pb-2">Countries</h5>
+        <fieldset>
+          <select name="countries" multiple className="border rounded ">
+            {countries.map((country) => (
+              <option key={country.id} value={country.id}>
+                {country.name}
+              </option>
+            ))}
+          </select>
+        </fieldset>
+      </div>
     </div>
   )
 }

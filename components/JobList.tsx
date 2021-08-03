@@ -49,12 +49,9 @@ export default function JobList() {
 
   return (
     <div className="flex flex-col w-full ">
-      {loading ? <h3>Loading ...</h3> : <h3>{jobs.length} results</h3>}
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+      <div className="bg-white shadow overflow-hidden sm:rounded-md divide-y divide-gray-200">
         {jobs.map((job) => (
-          <ul key={job.id} className="divide-y divide-gray-200">
-            <JobCard job={job} />
-          </ul>
+            <JobCard job={job} key={job.id} />
         ))}
       </div>
     </div>
@@ -63,7 +60,6 @@ export default function JobList() {
 
 const JobCard = ({ job }: { job: JobData }) => {
   return (
-    <li>
       <a href="#" className="block hover:bg-gray-50">
         <div className="flex items-center px-4 py-4">
           <div className="flex-shrink-0">
@@ -114,6 +110,5 @@ const JobCard = ({ job }: { job: JobData }) => {
           </div>
         </div>
       </a>
-    </li>
   )
 }

@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <SidebarLayout>
       <div className="flex-col flex-1">
-        <h3 className="text-xl font-bold">Jobs</h3>
         <JobList />
       </div>
     </SidebarLayout>
