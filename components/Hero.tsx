@@ -16,16 +16,16 @@ export default function Hero() {
                   <img
                     className="h-full w-full object-cover"
                     src={SITE.heroImage}
-                    alt="People working on laptops"
+                    alt={SITE.description}
                   />
                 </div>
                 <div className="relative px-4 py-16 sm:py-24 lg:py-32 ">
                   <h3 className="text-center text-4xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl">
-                    <span className="block text-white">{SITE.description}</span>
+                    <span className="block text-white w-1/2 mx-auto">{SITE.description}</span>
                   </h3>
 
                   <div className="mt-10 w-lg max-w-lg mx-auto  sm:flex sm:justify-center">
-                      <SearchBar />
+                    <SearchBar />
                   </div>
                 </div>
               </div>
