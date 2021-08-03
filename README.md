@@ -14,12 +14,17 @@ An open source job board built with Supabase.
 
 See the live demo at [ClimateJobs.co](https://climatejobs.co/)
 
+[Add screenshot]
+
+## Usage
+
+- TBD
 
 ## Inspiration
 
 - RemoteOk: https://twitter.com/levelsio/status/938707166508154880?lang=en
 
-
 ## License
 
-MIT
+[MIT](/LICENSE)
+
