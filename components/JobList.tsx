@@ -29,7 +29,7 @@ export default function JobList() {
       setLoading(true)
       const fetchJobs = supabase.from<JobData>('jobs').select(
         `
-        id, title, description, 
+        id, title, description, type,
         company:companies(id, name)
         `
       )
@@ -39,6 +39,7 @@ export default function JobList() {
       }
 
       const { data }: { data: any } = await fetchJobs.order('title')
+      console.log('data', data)
       setJobs(data)
     } catch (error) {
       console.error(error)
@@ -76,7 +77,7 @@ const JobCard = ({ job }: { job: JobData }) => {
               <p className="text-md font-bold truncate">{job.title} at {job.company.name}</p>
               <div className="ml-2 flex-shrink-0 flex">
                 <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Job Type
+                  {job.type}
                 </p>
               </div>
             </div>

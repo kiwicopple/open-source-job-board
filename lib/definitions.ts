@@ -312,6 +312,192 @@ export interface paths {
       };
     };
   };
+  "/departments": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.departments.id"];
+          name?: parameters["rowFilter.departments.name"];
+          description?: parameters["rowFilter.departments.description"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["departments"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** departments */
+          departments?: definitions["departments"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.departments.id"];
+          name?: parameters["rowFilter.departments.name"];
+          description?: parameters["rowFilter.departments.description"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.departments.id"];
+          name?: parameters["rowFilter.departments.name"];
+          description?: parameters["rowFilter.departments.description"];
+        };
+        body: {
+          /** departments */
+          departments?: definitions["departments"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/fields": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.fields.id"];
+          name?: parameters["rowFilter.fields.name"];
+          description?: parameters["rowFilter.fields.description"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["fields"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** fields */
+          fields?: definitions["fields"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.fields.id"];
+          name?: parameters["rowFilter.fields.name"];
+          description?: parameters["rowFilter.fields.description"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.fields.id"];
+          name?: parameters["rowFilter.fields.name"];
+          description?: parameters["rowFilter.fields.description"];
+        };
+        body: {
+          /** fields */
+          fields?: definitions["fields"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/job_categories": {
     get: {
       parameters: {
@@ -410,6 +596,8 @@ export interface paths {
           company_id?: parameters["rowFilter.jobs.company_id"];
           title?: parameters["rowFilter.jobs.title"];
           description?: parameters["rowFilter.jobs.description"];
+          tags?: parameters["rowFilter.jobs.tags"];
+          type?: parameters["rowFilter.jobs.type"];
           fts?: parameters["rowFilter.jobs.fts"];
           /** Filtering Columns */
           select?: parameters["select"];
@@ -465,6 +653,8 @@ export interface paths {
           company_id?: parameters["rowFilter.jobs.company_id"];
           title?: parameters["rowFilter.jobs.title"];
           description?: parameters["rowFilter.jobs.description"];
+          tags?: parameters["rowFilter.jobs.tags"];
+          type?: parameters["rowFilter.jobs.type"];
           fts?: parameters["rowFilter.jobs.fts"];
         };
         header: {
@@ -484,6 +674,8 @@ export interface paths {
           company_id?: parameters["rowFilter.jobs.company_id"];
           title?: parameters["rowFilter.jobs.title"];
           description?: parameters["rowFilter.jobs.description"];
+          tags?: parameters["rowFilter.jobs.tags"];
+          type?: parameters["rowFilter.jobs.type"];
           fts?: parameters["rowFilter.jobs.fts"];
         };
         body: {
@@ -510,7 +702,7 @@ export interface definitions {
      * This is a Primary Key.<pk/>
      */
     id: number;
-    name?: string;
+    name: string;
     description?: string;
   };
   companies: {
@@ -545,6 +737,24 @@ export interface definitions {
       | "North America"
       | "South America";
   };
+  departments: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    name: string;
+    description?: string;
+  };
+  fields: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    name: string;
+    description?: string;
+  };
   job_categories: {
     /**
      * Note:
@@ -572,6 +782,8 @@ export interface definitions {
     company_id: number;
     title: string;
     description: string;
+    tags?: string;
+    type: "full_time" | "part_time" | "contract" | "internship";
     fts?: string;
   };
 }
@@ -619,6 +831,16 @@ export interface parameters {
   /** Local variation of the name. */
   "rowFilter.countries.local_name": string;
   "rowFilter.countries.continent": string;
+  /** departments */
+  "body.departments": definitions["departments"];
+  "rowFilter.departments.id": string;
+  "rowFilter.departments.name": string;
+  "rowFilter.departments.description": string;
+  /** fields */
+  "body.fields": definitions["fields"];
+  "rowFilter.fields.id": string;
+  "rowFilter.fields.name": string;
+  "rowFilter.fields.description": string;
   /** job_categories */
   "body.job_categories": definitions["job_categories"];
   "rowFilter.job_categories.job_id": string;
@@ -629,6 +851,8 @@ export interface parameters {
   "rowFilter.jobs.company_id": string;
   "rowFilter.jobs.title": string;
   "rowFilter.jobs.description": string;
+  "rowFilter.jobs.tags": string;
+  "rowFilter.jobs.type": string;
   "rowFilter.jobs.fts": string;
 }
 

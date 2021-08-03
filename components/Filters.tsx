@@ -3,9 +3,10 @@ import { supabase } from 'lib/supabaseClient'
 import { definitions } from 'lib/definitions'
 
 const jobTypes = [
-  { key: 'full_time', value: 'Full Time' },
-  { key: 'part_time', value: 'Part Time' },
+  { key: 'full-time', value: 'Full Time' },
+  { key: 'part-time', value: 'Part Time' },
   { key: 'contract', value: 'Contract' },
+  { key: 'internship', value: 'Internship' },
 ]
 
 export default function Filters() {
