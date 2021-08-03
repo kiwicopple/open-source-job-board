@@ -3,7 +3,7 @@ import Logos from 'components/Logos'
 
 export default function Hero() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
       <header>Nav in here</header>
 
       <div>
