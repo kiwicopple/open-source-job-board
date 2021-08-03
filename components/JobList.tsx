@@ -1,50 +1,119 @@
 import { useEffect, useState } from 'react'
 import { supabase } from 'lib/supabaseClient'
 import { definitions } from 'lib/definitions'
+import { useRouter } from 'next/router'
+import {
+  CalendarIcon,
+  LocationMarkerIcon,
+  UsersIcon,
+  ChevronRightIcon,
+} from '@heroicons/react/solid'
 
 type JobData = definitions['jobs'] & {
   company: definitions['companies']
 }
 
 export default function JobList() {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
   const [jobs, setJobs] = useState<JobData[]>([])
+  const { query } = router
+  const searchText = query.q?.toString()
 
   useEffect(() => {
     loadPage()
-  }, [])
+  }, [searchText])
 
   const loadPage = async () => {
-    const { data }: { data: any } = await supabase
-      .from<JobData>('jobs')
-      .select(
+    try {
+      setLoading(true)
+      const fetchJobs = supabase.from<JobData>('jobs').select(
         `
-        id, name, description, 
+        id, title, description, 
         company:companies(id, name)
         `
       )
-      .order('name')
-    setJobs(data)
+
+      if (searchText) {
+        fetchJobs.textSearch('fts', searchText)
+      }
+
+      const { data }: { data: any } = await fetchJobs.order('title')
+      setJobs(data)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div className="flex flex-col w-full">
-      {jobs.map((job) => (
-        <div key={job.id}>
-          <JobCard job={job} />
-        </div>
-      ))}
+    <div className="flex flex-col w-full ">
+      {loading ? <h3>Loading ...</h3> : <h3>{jobs.length} results</h3>}
+      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+        {jobs.map((job) => (
+          <ul key={job.id} className="divide-y divide-gray-200">
+            <JobCard job={job} />
+          </ul>
+        ))}
+      </div>
     </div>
   )
 }
 
 const JobCard = ({ job }: { job: JobData }) => {
   return (
-    <a key={job.id}>
-      <div className="border rounded p-2 mb-4">
-        <h5 className="uppercase text-gray-600 text-sm">{job.company.name}</h5>
-        <h4 className="text-xl font-bold">{job.name}</h4>
-        <div>{job.description}</div>
-      </div>
-    </a>
+    <li>
+      <a href="#" className="block hover:bg-gray-50">
+        <div className="flex items-center px-4 py-4">
+          <div className="flex-shrink-0">
+            <img
+              className="h-12 w-12 rounded-md"
+              src={
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+              }
+              alt=""
+            />
+          </div>
+          <div className="px-4 py-4 flex-1">
+            <div className="flex items-center justify-between">
+              <p className="text-md font-bold truncate">{job.title} at {job.company.name}</p>
+              <div className="ml-2 flex-shrink-0 flex">
+                <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  Job Type
+                </p>
+              </div>
+            </div>
+            <div className="mt-2 sm:flex sm:justify-between">
+              <div className="sm:flex">
+                <p className="flex items-center text-sm text-gray-500">
+                  <UsersIcon
+                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  Job.department
+                </p>
+                <p className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                  <LocationMarkerIcon
+                    className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  Job Location
+                </p>
+              </div>
+              <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                <CalendarIcon
+                  className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+                <p>
+                  Closing on <time dateTime={new Date().toDateString()}>Closing</time>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </li>
   )
 }

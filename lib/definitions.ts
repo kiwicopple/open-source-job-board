@@ -12,6 +12,99 @@ export interface paths {
       };
     };
   };
+  "/categories": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.categories.id"];
+          name?: parameters["rowFilter.categories.name"];
+          description?: parameters["rowFilter.categories.description"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["categories"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** categories */
+          categories?: definitions["categories"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.categories.id"];
+          name?: parameters["rowFilter.categories.name"];
+          description?: parameters["rowFilter.categories.description"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.categories.id"];
+          name?: parameters["rowFilter.categories.name"];
+          description?: parameters["rowFilter.categories.description"];
+        };
+        body: {
+          /** categories */
+          categories?: definitions["categories"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/companies": {
     get: {
       parameters: {
@@ -219,14 +312,105 @@ export interface paths {
       };
     };
   };
+  "/job_categories": {
+    get: {
+      parameters: {
+        query: {
+          job_id?: parameters["rowFilter.job_categories.job_id"];
+          category_id?: parameters["rowFilter.job_categories.category_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["job_categories"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** job_categories */
+          job_categories?: definitions["job_categories"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          job_id?: parameters["rowFilter.job_categories.job_id"];
+          category_id?: parameters["rowFilter.job_categories.category_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          job_id?: parameters["rowFilter.job_categories.job_id"];
+          category_id?: parameters["rowFilter.job_categories.category_id"];
+        };
+        body: {
+          /** job_categories */
+          job_categories?: definitions["job_categories"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/jobs": {
     get: {
       parameters: {
         query: {
           id?: parameters["rowFilter.jobs.id"];
           company_id?: parameters["rowFilter.jobs.company_id"];
-          name?: parameters["rowFilter.jobs.name"];
+          title?: parameters["rowFilter.jobs.title"];
           description?: parameters["rowFilter.jobs.description"];
+          fts?: parameters["rowFilter.jobs.fts"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -279,8 +463,9 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.jobs.id"];
           company_id?: parameters["rowFilter.jobs.company_id"];
-          name?: parameters["rowFilter.jobs.name"];
+          title?: parameters["rowFilter.jobs.title"];
           description?: parameters["rowFilter.jobs.description"];
+          fts?: parameters["rowFilter.jobs.fts"];
         };
         header: {
           /** Preference */
@@ -297,8 +482,9 @@ export interface paths {
         query: {
           id?: parameters["rowFilter.jobs.id"];
           company_id?: parameters["rowFilter.jobs.company_id"];
-          name?: parameters["rowFilter.jobs.name"];
+          title?: parameters["rowFilter.jobs.title"];
           description?: parameters["rowFilter.jobs.description"];
+          fts?: parameters["rowFilter.jobs.fts"];
         };
         body: {
           /** jobs */
@@ -318,6 +504,15 @@ export interface paths {
 }
 
 export interface definitions {
+  categories: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    name?: string;
+    description?: string;
+  };
   companies: {
     /**
      * Note:
@@ -350,6 +545,20 @@ export interface definitions {
       | "North America"
       | "South America";
   };
+  job_categories: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `jobs.id`.<fk table='jobs' column='id'/>
+     */
+    job_id: number;
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     * This is a Foreign Key to `categories.id`.<fk table='categories' column='id'/>
+     */
+    category_id: number;
+  };
   jobs: {
     /**
      * Note:
@@ -361,8 +570,9 @@ export interface definitions {
      * This is a Foreign Key to `companies.id`.<fk table='companies' column='id'/>
      */
     company_id: number;
-    name?: string;
-    description?: string;
+    title: string;
+    description: string;
+    fts?: string;
   };
 }
 
@@ -387,6 +597,11 @@ export interface parameters {
   offset: string;
   /** Limiting and Pagination */
   limit: string;
+  /** categories */
+  "body.categories": definitions["categories"];
+  "rowFilter.categories.id": string;
+  "rowFilter.categories.name": string;
+  "rowFilter.categories.description": string;
   /** companies */
   "body.companies": definitions["companies"];
   "rowFilter.companies.id": string;
@@ -404,12 +619,17 @@ export interface parameters {
   /** Local variation of the name. */
   "rowFilter.countries.local_name": string;
   "rowFilter.countries.continent": string;
+  /** job_categories */
+  "body.job_categories": definitions["job_categories"];
+  "rowFilter.job_categories.job_id": string;
+  "rowFilter.job_categories.category_id": string;
   /** jobs */
   "body.jobs": definitions["jobs"];
   "rowFilter.jobs.id": string;
   "rowFilter.jobs.company_id": string;
-  "rowFilter.jobs.name": string;
+  "rowFilter.jobs.title": string;
   "rowFilter.jobs.description": string;
+  "rowFilter.jobs.fts": string;
 }
 
 export interface operations {}
