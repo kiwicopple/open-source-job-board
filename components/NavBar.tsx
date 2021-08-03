@@ -36,7 +36,7 @@ export default function NavBar() {
             <span className="inline-flex rounded-md shadow">
               <a
                 href="#"
-                className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-white hover:bg-gray-50"
+                className="inline-flex items-center px-4 py-2 border-2 border-black text-base font-medium rounded-md bg-white hover:bg-gray-50"
               >
                 Post Job
               </a>

@@ -3,12 +3,13 @@
 An open source job board built with Supabase.
 
 
-## Built with
+## Stack
 
 - Backend: PostgreSQL + Supabase
 - Frontend: Next.js + Tailwind
 - Auth: Supabase Auth + Postgres Row Level Security
 - Storage: Supabase Storage
+- Search: Postgres Full Text Search
 
 ## Live demo
 
