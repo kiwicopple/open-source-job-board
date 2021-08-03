@@ -18,10 +18,13 @@ export default function JobList() {
   }
 
   return (
-    <div className="flex flex-col">
-
+    <div className="flex flex-col w-full">
       {jobs.map((job) => (
-        <div key={job.id}>{job.name}</div>
+        <a key={job.id}>
+          <div className="border rounded py-2 mb-4">
+            <h4>{job.name}</h4>
+          </div>
+        </a>
       ))}
     </div>
   )

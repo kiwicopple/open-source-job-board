@@ -17,11 +17,11 @@ export default function SidebarLayout({ children }: { children: ReactChild }) {
       </header>
 
       <Header />
-      <div className="flex">
-        <nav>
+      <div className="max-w-7xl mx-auto flex">
+        <nav className="p-4">
           <Filters />
         </nav>
-        <main className="flex">{children}</main>
+        <main className="p-4 flex flex-1">{children}</main>
       </div>
 
       <Footer />

@@ -1,5 +1,6 @@
 import SITE from 'config/site'
 import Logos from 'components/Logos'
+import SearchBar from './SearchBar'
 
 export default function Hero() {
   return (
@@ -23,10 +24,8 @@ export default function Hero() {
                     <span className="block text-white">{SITE.description}</span>
                   </h3>
 
-                  <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center">
-                    <div className="space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5">
-                      <input type="text" placeholder="Search jobs" />
-                    </div>
+                  <div className="mt-10 w-lg max-w-lg mx-auto  sm:flex sm:justify-center">
+                      <SearchBar />
                   </div>
                 </div>
               </div>
