@@ -12,6 +12,99 @@ export interface paths {
       };
     };
   };
+  "/companies": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.companies.id"];
+          inserted_at?: parameters["rowFilter.companies.inserted_at"];
+          name?: parameters["rowFilter.companies.name"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["companies"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** companies */
+          companies?: definitions["companies"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.companies.id"];
+          inserted_at?: parameters["rowFilter.companies.inserted_at"];
+          name?: parameters["rowFilter.companies.name"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.companies.id"];
+          inserted_at?: parameters["rowFilter.companies.inserted_at"];
+          name?: parameters["rowFilter.companies.name"];
+        };
+        body: {
+          /** companies */
+          companies?: definitions["companies"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
   "/countries": {
     get: {
       parameters: {
@@ -126,9 +219,114 @@ export interface paths {
       };
     };
   };
+  "/jobs": {
+    get: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.jobs.id"];
+          company_id?: parameters["rowFilter.jobs.company_id"];
+          name?: parameters["rowFilter.jobs.name"];
+          description?: parameters["rowFilter.jobs.description"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["jobs"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** jobs */
+          jobs?: definitions["jobs"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.jobs.id"];
+          company_id?: parameters["rowFilter.jobs.company_id"];
+          name?: parameters["rowFilter.jobs.name"];
+          description?: parameters["rowFilter.jobs.description"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          id?: parameters["rowFilter.jobs.id"];
+          company_id?: parameters["rowFilter.jobs.company_id"];
+          name?: parameters["rowFilter.jobs.name"];
+          description?: parameters["rowFilter.jobs.description"];
+        };
+        body: {
+          /** jobs */
+          jobs?: definitions["jobs"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
 }
 
 export interface definitions {
+  companies: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    inserted_at: string;
+    name?: string;
+  };
   countries: {
     /**
      * Note:
@@ -151,6 +349,20 @@ export interface definitions {
       | "Oceania"
       | "North America"
       | "South America";
+  };
+  jobs: {
+    /**
+     * Note:
+     * This is a Primary Key.<pk/>
+     */
+    id: number;
+    /**
+     * Note:
+     * This is a Foreign Key to `companies.id`.<fk table='companies' column='id'/>
+     */
+    company_id: number;
+    name?: string;
+    description?: string;
   };
 }
 
@@ -175,6 +387,11 @@ export interface parameters {
   offset: string;
   /** Limiting and Pagination */
   limit: string;
+  /** companies */
+  "body.companies": definitions["companies"];
+  "rowFilter.companies.id": string;
+  "rowFilter.companies.inserted_at": string;
+  "rowFilter.companies.name": string;
   /** countries */
   "body.countries": definitions["countries"];
   "rowFilter.countries.id": string;
@@ -187,6 +404,12 @@ export interface parameters {
   /** Local variation of the name. */
   "rowFilter.countries.local_name": string;
   "rowFilter.countries.continent": string;
+  /** jobs */
+  "body.jobs": definitions["jobs"];
+  "rowFilter.jobs.id": string;
+  "rowFilter.jobs.company_id": string;
+  "rowFilter.jobs.name": string;
+  "rowFilter.jobs.description": string;
 }
 
 export interface operations {}
