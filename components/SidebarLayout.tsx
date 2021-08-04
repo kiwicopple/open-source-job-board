@@ -29,7 +29,7 @@ export default function SidebarLayout({ children }: { children: ReactChild }) {
 
       <Hero />
       <div className="max-w-7xl mx-auto">
-        <div className="p-4 flex  flex-row">
+        <div className="p-4 flex flex-row">
           <div className="flex-1">
             <h2 className="text-xl font-bold">Jobs {searchText && ` matching "${searchText}"`}</h2>
           </div>
@@ -46,7 +46,7 @@ export default function SidebarLayout({ children }: { children: ReactChild }) {
         </div>
         <div className="flex">
           <main className="p-4 flex flex-1">{children}</main>
-          <nav className={showFilters ? 'p-4' : 'hidden'}>
+          <nav className={showFilters ? 'p-4 w-1/4 max-w-64' : 'hidden'}>
             <Filters />
           </nav>
         </div>

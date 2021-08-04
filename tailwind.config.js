@@ -1,14 +1,14 @@
+const { colors } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        brand: '#000',
-        'brand-light': '#dedede',
+        brand: { ...colors.blue },
       },
     },
-    borderColor: '#000',
   },
   variants: {
     extend: {},

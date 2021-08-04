@@ -57,7 +57,7 @@ export default function JobList() {
   // Render results
   return (
     <div className="flex flex-col w-full ">
-      <div className="border-2 overflow-hidden sm:rounded-md divide-y">
+      <div className="shadow-md overflow-hidden sm:rounded-md divide-y">
         {filtered.map((job) => (
           <JobCard job={job} key={job.id} />
         ))}
@@ -85,7 +85,7 @@ const JobCard = ({ job }: { job: JobData }) => {
               {job.title} at {job.company.name}
             </p>
             <div className="ml-2 flex-shrink-0 flex">
-              <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-brand text-brand-light">
+              <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-brand-100 text-brand-800">
                 {job.type}
               </p>
             </div>

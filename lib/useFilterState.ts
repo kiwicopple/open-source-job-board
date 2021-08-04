@@ -4,11 +4,14 @@ export default function useFilterState() {
   // Use the URL to store query state
   const router = useRouter()
   const { query } = router
-  const q = query.q?.toString()
-  const selectedTypes = (query.type?.toString() || '').split(',').filter(x => !!x)
+
+  function paramToArray(queryParam: string | string[] | undefined) {
+    return (queryParam?.toString() || '').split(',').filter((x) => !!x)
+  }
 
   return {
-    q,
-    types: selectedTypes
+    q: query.q?.toString(),
+    types: paramToArray(query.type),
+    departments: paramToArray(query.department),
   }
 }
