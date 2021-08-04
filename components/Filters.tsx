@@ -25,7 +25,7 @@ export default function Filters() {
   }
 
   return (
-    <div className="flex flex-col bg-white shadow overflow-hidden sm:rounded-md divide-y divide-gray-200">
+    <div className="flex flex-col border-2 overflow-hidden sm:rounded-md divide-y">
       <div className="p-4">
         <h5 className="text-md font-bold pb-2">Type</h5>
         <fieldset className="space-y-2">
@@ -37,7 +37,7 @@ export default function Filters() {
                   aria-describedby={value}
                   name={value}
                   type="checkbox"
-                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded cursor-pointer"
+                  className="focus:ring-brand h-4 w-4 text-brand border-gray-300 rounded cursor-pointer"
                 />
               </div>
               <div className="ml-3 text-sm">

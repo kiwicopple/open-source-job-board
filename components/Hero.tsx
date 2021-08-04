@@ -11,7 +11,7 @@ export default function Hero() {
           <div className="relative">
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
             <div className="max-w-7xl mx-auto px-4">
-              <div className="relative shadow-xl sm:rounded-lg sm:overflow-hidden">
+              <div className="relative shadow-xl sm:rounded-lg sm:overflow-hidden border-2">
                 <div className="absolute inset-0">
                   <img
                     className="h-full w-full object-cover"

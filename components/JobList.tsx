@@ -50,9 +50,9 @@ export default function JobList() {
 
   return (
     <div className="flex flex-col w-full ">
-      <div className="bg-white shadow overflow-hidden sm:rounded-md divide-y divide-gray-200">
+      <div className="border-2 overflow-hidden sm:rounded-md divide-y">
         {jobs.map((job) => (
-            <JobCard job={job} key={job.id} />
+          <JobCard job={job} key={job.id} />
         ))}
       </div>
     </div>
@@ -62,7 +62,7 @@ export default function JobList() {
 const JobCard = ({ job }: { job: JobData }) => {
   return (
       <a href="#" className="block hover:bg-gray-50">
-        <div className="flex items-center px-4 py-4">
+        <div className="flex items-center px-4">
           <div className="flex-shrink-0">
             <img
               className="h-12 w-12 rounded-md"
@@ -74,9 +74,9 @@ const JobCard = ({ job }: { job: JobData }) => {
           </div>
           <div className="px-4 py-4 flex-1">
             <div className="flex items-center justify-between">
-              <p className="text-md font-bold truncate">{job.title} at {job.company.name}</p>
+              <p className="text-md font-bold truncate text-brand">{job.title} at {job.company.name}</p>
               <div className="ml-2 flex-shrink-0 flex">
-                <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <p className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-brand text-brand-light">
                   {job.type}
                 </p>
               </div>

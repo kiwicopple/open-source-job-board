@@ -38,7 +38,7 @@ export default function SidebarLayout({ children }: { children: ReactChild }) {
             <button
               type="button"
               onClick={() => setShowFilters(!showFilters)}
-              className="inline-flex items-center text-xs p-2 border shadow-sm leading-4 font-medium rounded "
+              className="inline-flex items-center text-xs p-2 border-2 leading-4 font-medium rounded "
             >
               {showFilters ? 'Hide' : 'Show'} Filters
             </button>
@@ -71,7 +71,7 @@ function SortDropdown() {
       {({ open }) => (
         <>
           <div className="relative">
-            <Listbox.Button className="bg-white relative w-full border rounded shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-xs">
+            <Listbox.Button className="bg-white relative w-full border-2 rounded shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-xs">
               <span className="block truncate">{selected.name}</span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <SelectorIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
