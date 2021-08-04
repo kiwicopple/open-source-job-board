@@ -37,7 +37,7 @@ create table jobs (
 -- Add Full Text Search
 alter table jobs
   add column fts tsvector generated always as (
-     to_tsvector('english', title || ' ' || description || ' ' || tags)
+     to_tsvector('english', title || ' ' || description || ' ' || coalesce(tags, ''))
   ) stored;
 
 create index fts_idx ON jobs USING GIN (fts);

@@ -1,16 +1,25 @@
 import { useEffect, useState } from 'react'
 import { supabase } from 'lib/supabaseClient'
 import { definitions } from 'lib/definitions'
+import useFilterState from 'lib/useFilterState'
+import { useRouter } from 'next/router'
+import { addOrRemove } from 'lib/helpers'
 
 const jobTypes = [
-  { key: 'full-time', value: 'Full Time' },
-  { key: 'part-time', value: 'Part Time' },
+  { key: 'full_time', value: 'Full Time' },
+  { key: 'part_time', value: 'Part Time' },
   { key: 'contract', value: 'Contract' },
   { key: 'internship', value: 'Internship' },
 ]
 
 export default function Filters() {
   const [countries, setCountries] = useState<definitions['countries'][]>([])
+
+  // Use the URL to store query state
+  const router = useRouter()
+  const { query } = router
+  const filterState = useFilterState()
+  const selectedTypes = filterState.types
 
   useEffect(() => {
     loadPage()
@@ -22,6 +31,23 @@ export default function Filters() {
       .select('id, name')
       .order('name')
     setCountries(data)
+  }
+
+  function toggleJobTypes(event: React.ChangeEvent<HTMLInputElement>) {
+    const type = addOrRemove(selectedTypes, event.target.id).join(',')
+    if (type) pushState({ ...query, type })
+    else pushState({ ...query, type: undefined })
+  }
+
+  function pushState(query: any) {
+    router.push(
+      {
+        pathname: '/',
+        query,
+      },
+      undefined,
+      { shallow: true }
+    )
   }
 
   return (
@@ -36,7 +62,9 @@ export default function Filters() {
                   id={key}
                   aria-describedby={value}
                   name={value}
+                  onChange={toggleJobTypes}
                   type="checkbox"
+                  checked={selectedTypes.includes(key)}
                   className="focus:ring-brand h-4 w-4 text-brand border-gray-300 rounded cursor-pointer"
                 />
               </div>
